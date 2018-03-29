@@ -1,0 +1,9 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.ReactModal__Content.react-bs-insert-modal.modal-dialog .modal-header span{
+  width: 100%;
+}
