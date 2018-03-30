@@ -7,3 +7,24 @@ body {
 .ReactModal__Content.react-bs-insert-modal.modal-dialog .modal-header span{
   width: 100%;
 }
+
+
+.pagination{
+
+  list-style-type: none;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+}
+
+.pagination li {
+      float: left!important;
+}
+
+.pagination a{
+  display: block;
+    padding: 8px;
+    background-color: red;
+    color: white;
+}
+
