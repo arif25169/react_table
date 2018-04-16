@@ -11,7 +11,7 @@ import registerServiceWorker from './registerServiceWorker';
 
 
 ReactDOM.render(<App />, document.getElementById('root'));
-ReactDOM.render(<PagesShow />, document.getElementById('app_pages'));
+//ReactDOM.render(<PagesShow />, document.getElementById('app_pages'));
 //ReactDOM.render(<BootstrapTable />, document.getElementById('table_bootstrap'));
 ReactDOM.render(<DataGrid />, document.getElementById('table_bootstrap'));
 registerServiceWorker();

@@ -27,9 +27,10 @@ class DataGrid extends Component {
       }
       alert('The new row is:\n ' + newRowStr);
       const self = this;
-      //row.Type = 1;
-      //row.IsActive=true;
-      row.PublishedOn = new Date();
+      //row.type = 1;
+      //row.isActive=true;
+      row.id = 1; //Default id
+      row.publishedOn ? true: row.publishedOn = new Date() ; //Set today as date if null
       fetch("http://pagesmanagement.azurewebsites.net/api/ResponsivePages/", {
         method : 'POST',
         body : JSON.stringify(row),
@@ -272,6 +273,37 @@ class DataGrid extends Component {
         return enumObject[cell];
       }
 
+      function titleValidator(value, row){
+        const response = { isValid: true, notification: { type: 'success', msg: '', title: '' } };
+        if (!value) {
+          response.isValid = false;
+          response.notification.type = 'error';
+          response.notification.msg = 'Title must be inserted';
+          response.notification.title = 'Requested Value';
+        } else if (value.length > 50) {
+          response.isValid = false;
+          response.notification.type = 'error';
+          response.notification.msg = 'Title must have max 50 characters';
+          response.notification.title = 'Invalid Value';
+        }
+      return response;
+      }
+
+      function descrValidator(value, row){
+        const response = { isValid: true, notification: { type: 'success', msg: '', title: '' } };
+        if (!value) {
+          response.isValid = false;
+          response.notification.type = 'error';
+          response.notification.msg = 'Description must be inserted';
+          response.notification.title = 'Requested Value';
+        } else if (value.length > 200) {
+          response.isValid = false;
+          response.notification.type = 'error';
+          response.notification.msg = 'Description must have max 200 characters';
+          response.notification.title = 'Invalid Value';
+        }
+      return response;
+      }
       
       return (
         <BootstrapTable data={ this.props.data }
@@ -280,11 +312,11 @@ class DataGrid extends Component {
                         cellEdit={ cellEditProp }
                         insertRow deleteRow 
                         search = {true}
-                        pagination = {true}
+                        //pagination = {true}
                         fetchInfo={ fetchInfo }
                         striped hover
                         options={ { 
-                          onPageChange: this.props.onPageChange,
+                         /* onPageChange: this.props.onPageChange,
                           sizePerPageList: [ 5, 10 ],
                           page: this.props.currentPage,
                           onSizePerPageList: this.props.onSizePerPageList,
@@ -296,7 +328,7 @@ class DataGrid extends Component {
                           //nextPage: 'Next', // Next page button text
                           //firstPage: 'First', // First page button text
                           //lastPage: 'Last', // Last page button text
-                          
+                          */
                           onAddRow: this.props.onAddRow,
                           onDeleteRow: this.props.onDeleteRow,
                           onCellEdit: this.props.onCellEdit,
@@ -307,11 +339,11 @@ class DataGrid extends Component {
                           
                           } }>
           <TableHeaderColumn dataField='id' isKey={ true } hiddenOnInsert>Page ID</TableHeaderColumn>
-          <TableHeaderColumn dataField='title' dataSort={true}>Page Title</TableHeaderColumn>
-          <TableHeaderColumn dataField='description' dataSort={true}>Page Description</TableHeaderColumn>
+          <TableHeaderColumn dataField='title' dataSort={true} editable={{ validator: titleValidator}}>Page Title</TableHeaderColumn>
+          <TableHeaderColumn dataField='description' dataSort={true} editable={{ validator: descrValidator}}>Page Description</TableHeaderColumn>
           <TableHeaderColumn dataField='type' dataFormat={ enumFormatter } formatExtraData={ pageType } editable={ { type: 'select', options: { values: [{value:0, text:'Menu'},{value:1, text:'Events'},{value:2, text:'Content'}] } } } dataSort={true}>Page Type</TableHeaderColumn>
-          <TableHeaderColumn dataField='isActive' editable={ { type: 'select', options: { values: ['true','false'] } } } dataSort={true}>Active</TableHeaderColumn>
-          <TableHeaderColumn dataField='publishedOn' editable={ false } dataSort={true}>Publish Date</TableHeaderColumn>
+          <TableHeaderColumn dataField='isActive' editable={ { type: 'select', options: { values: [{value:true, text:"true"},{value:false, text:"false"}] } } } dataSort={true}>Active</TableHeaderColumn>
+          <TableHeaderColumn dataField='publishedOn' editable={ {type:'date'} } dataSort={true}>Publish Date</TableHeaderColumn>
         </BootstrapTable>
       );
     }
