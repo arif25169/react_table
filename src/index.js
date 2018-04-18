@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import PagesShow from './PagesShow';
+//import PagesShow from './PagesShow';
 //import BootstrapTable from './Table';
-import DataGrid from './Table';
+import DataGrid from './PagesTable';
 import registerServiceWorker from './registerServiceWorker';
 //import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 //import './bootstrap.min.css'
