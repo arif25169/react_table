@@ -2,7 +2,7 @@ import React,  { Component }  from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import RemoteTable from './BsTable';
 
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
+//import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
 import 'react-bootstrap-table/dist/react-bootstrap-table-all.min.css';
 
 
